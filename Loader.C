@@ -40,7 +40,6 @@ Loader::Loader(int argc, char * argv[])
        //attempt to open specified file: 
        if(openFile(argc, argv)) {
            //file opened successfully.
-           //TODO: Below statement makes no sense. What is getline()? and inf?
            while (std::getline(inf, line)) {
                //print the input line to the console.
                cout << line << endl;  
@@ -92,7 +91,6 @@ bool Loader::openFile(int numArgs, char * argv[]) {
     string fileName = argv[1];
     //if file extension matches
     if (fileName.compare(size-3,size,".yo") == 0) {
-       //TODO: Where the hell is inf declared? of type std::filebuf?
        inf.open(argv[1],std::ifstream::in);
        if (inf.is_open()) {
         return true;
@@ -155,21 +153,20 @@ bool Loader::hasAddress(string s) {
 
 /**
  * getAddress
- * Returns the address of the instruction as a 32 bit number. 
+ * Returns the address of the instruction as a string.
  * @param line -The syntactically correct and error free input line.
- * @return ttAddy -The hexadecimal 32 bit number representation of the address.
+ * @return addy -The string representation of the address.
 */
-uint32_t Loader::getAddress(string line) {
-    //TODO:Validate method body is working correctly.
+string Loader::getAddress(string line) {
     if (hasAddress(line))
      {
         string addy = "";
         addy += line.c_str()[2];
         addy += line.c_str()[3];
         addy += line.c_str()[4];
-        uint32_t ttAddy = strtol(addy.c_str(), NULL, 16);
-        cout << "ttAddy: %x" << ttAddy << endl;
-        return ttAddy;
+        //uint32_t ttAddy = strtol(addy.c_str(), NULL, 16);
+        //cout << "ttAddy: %x" << ttAddy << endl;
+        return addy;
      }
      else
      {

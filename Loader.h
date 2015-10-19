@@ -9,7 +9,7 @@ class Loader
       int32_t convert(string line, int start, int end); //returns a string as an int
       int getDataEnd(string line);  //returns the index of the last valid hex token.
       bool hasAddress(string s);    //return true if the input line has an address
-      uint32_t getAddress(string line);    //returns the address of the instruction. 
+      string getAddress(string line);    //returns the address of the instruction. 
       bool hasData(string s);       //return true if the input line has data
       bool isHexData(string s);     //returns true if the input string (presumably data) is valid hex chars.
       uint8_t getData(string line); // gets data from input line. The Returns the data section of input line
