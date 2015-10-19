@@ -239,9 +239,13 @@ int Loader::getDataEnd(string line) {
  * getData
  * Gets the data from the input line.
  * @param line -the line read from the input file.
- * @return data -the data section of the input line.
+ * @return data -A string containing the data section of the input line.
 **/
-uint64_t getData(string line) {
+string getData(string line) {
+    string data = "";
+    for(int i = 0; i < strlen(line.c_str()); i++) {
+        //TODO: method body.
+    }
     line = line << 28;
     return line;
 }
