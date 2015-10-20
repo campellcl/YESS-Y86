@@ -242,9 +242,11 @@ int Loader::getDataEnd(string line) {
  * @return data -A string containing the data section of the input line.
 **/
 string getData(string line) {
-    string data = "";
+    string data = ""; 
     for(int i = DATABEGIN; i < DATAEND; i++) {
-        data += line.c_str()[i];
+        if (!isAllSpace(line.c_str()[i],line.c_str()[i],line)) {
+            data += line.c_str()[i]; 
+        }
     }
     return data;
 }
@@ -315,14 +317,11 @@ bool Loader::hasAddrError(string line) {
         //int instrLength = getOpcodeLength(line);
         //int lineLength = strlen(line); 
         //get the address of line as a number..  
-        string address = line.c_str()[2] + line.c_str()[3] + line.c_str()[4];
-        string data = "";
-        for(int i = 7; line.c_str()[i] != NULL; i++) {
-            data += line.c_str()[i];
-        }
+        string address = getAddress(line);
+        string data = getData(line);
         int addrHex = strtol(address,NULL,16);
-        int instrLength = strlen(data); 
         int instrHex = strtol(data,NULL,16);
+        int instrLength = strlen(data); 
         int addrLastByte = addrHex + instrLength;
         if (addrLastByte <= (instrLength + addrHex)) {
             //address of last btye
@@ -342,6 +341,8 @@ bool Loader::hasAddrError(string line) {
 **/
 bool Loader::hasDataError(string line) {
     //TODO: write method body.
+    string data = getData(line); 
+
 }
 
 /**
@@ -354,8 +355,23 @@ bool Loader::hasDataError(string line) {
  *  range are spaces, false otherwise.
 **/
 bool Loader::isAllSpace(int start, int end, string line) {
+    string testee = line.substr(start, end);
+    // end - start == the amount of character that are in the string. 
+    // get the substring and then check if it is anything but a string. If it is
+    // return false. otherwise, wait till end of loop, to check, then return true.
+    for (int i = 0; i < end - start; i++) {
+        string testicle = testee.c_str()[i];
+        if (strcmp  (testicle," ") != 0) {
+            return false;
+        } else {
+            if (i == end - start) {
+                return true;
+            }
+        }
+    }
     //TODO: write method body.
 }
+
 /**
  * getOpcodeLength
  * Returns the lenght of the instruction data.

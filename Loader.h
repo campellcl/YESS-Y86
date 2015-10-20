@@ -12,7 +12,7 @@ class Loader
       string getAddress(string line);    //returns the address of the instruction. 
       bool hasData(string s);       //return true if the input line has data
       bool isHexData(string s);     //returns true if the input string (presumably data) is valid hex chars.
-      uint8_t getData(string line); // gets data from input line. The Returns the data section of input line
+      string getData(string line); // gets data from input line. The Returns the data section of input line
       bool hasAddrError(string line);   //Takes an address from the current line of input and checks for errors.
       bool hasDataError(string line);   //Takes the data portion from the current line of input and checks for errors.
       bool hasError(string line);   //Checks the address and data portion from the current line of input for errors.
