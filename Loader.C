@@ -243,11 +243,10 @@ int Loader::getDataEnd(string line) {
 **/
 string getData(string line) {
     string data = "";
-    for(int i = 0; i < DATAEND; i++) {
-        //TODO: method body.
+    for(int i = DATABEGIN; i < DATAEND; i++) {
+        data += line.c_str()[i];
     }
-    line = line << 28;
-    return line;
+    return data;
 }
 
 /**
