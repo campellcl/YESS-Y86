@@ -243,7 +243,7 @@ int Loader::getDataEnd(string line) {
 **/
 string getData(string line) {
     string data = "";
-    for(int i = 0; i < strlen(line.c_str()); i++) {
+    for(int i = 0; i < DATAEND; i++) {
         //TODO: method body.
     }
     line = line << 28;
@@ -265,18 +265,17 @@ void Loader::loadLine(string line)
    uint8_t secondByteData;
    bool imem_error = false;
    //get the address
-    uint32_t address = convert(line,ADDRBEGIN,ADDREND);
-    cout << "address: %x" << address << endl;
-    //get the data
-     while( isxdigit(line.c_str()[firstByte]) && isxdigit(line.c_str()[secondByte]))
-     {
+   uint32_t address = convert(line,ADDRBEGIN,ADDREND);
+   cout << "address: %x" << address << endl;
+   //get the data
+   while( isxdigit(line.c_str()[firstByte]) && isxdigit(line.c_str()[secondByte])) {
       firstByteData = convert(line, firstByte, firstByte);
       secondByteData = convert(line, secondByte, secondByte);
       firstByte += 2;
       secondByte += 2;
       Memory::getInstance()->putByte(firstByteData, address, imem_error);
-      Memory::getInstance()->putByte(secondByteData, address, imem_error);    
-     }
+      Memory::getInstance()->putByte(secondByteData, address, imem_error);
+   }
 }
 
 /**
@@ -370,7 +369,7 @@ int getOpcodeLength(string line) {
     for(i = 7; line.c_str()[i] != NULL; i++) {
         instrLength = i;
     }
-    return instrLength
+    return instrLength;
 }
 
 //You'll need to add more helper methods to this file.  Don't put all of your code in the
